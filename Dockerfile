@@ -16,3 +16,5 @@ RUN curl https://dl.min.io/client/mc/release/linux-amd64/mc --create-dirs -s -o 
 RUN chmod +x $HOME/minio-binaries/mc
 RUN export PATH=$PATH:$HOME/minio-binaries
 ENV PATH="$PATH:$HOME/minio-binaries"
+
+# install rclone
