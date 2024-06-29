@@ -7,6 +7,11 @@ ENV ACTION="BACKUP|RESTORE"
 ENV SRC_TYPE="BucketAWS|Postgres|AllPostgres|Mysql|Redis|backupAllPodK8sPostgresToBucket"
 
 # S3 Environments Variables
+
+ENV S3_DESTINATION_HOST="https://s3.amazonaws.com"
+ENV S3_DESTINATION_ACCESS_KEY=""
+ENV S3_DESTINATION_SECRET_KEY=""
+
 ENV S3_DESTINATION_BUCKET="bucket-dst"
 ENV FILE_BACKUP_PSQL="allDATACbox.sql"
 
