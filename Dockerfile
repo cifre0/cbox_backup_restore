@@ -4,6 +4,7 @@ FROM ubuntu:latest
 USER root
 
 ENV ACTION="BACKUP|RESTORE"
+ENV SRC_TYPE="BucketAWS|Postgres|AllPostgres|Mysql|Redis|backupAllPodK8sPostgresToBucket"
 
 # S3 Environments Variables
 ENV S3_DESTINATION_BUCKET="bucket-dst"
