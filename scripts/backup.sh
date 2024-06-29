@@ -29,7 +29,7 @@ backupAllPostgresToBucket() {
   #aws $ENDPOINT_URL s3 cp - s3://$S3_DESTINATION_BUCKET/postgres-$DATE/$FILE.sql
 
   kubectl exec -it -n psql bdd-postgresql-0 -- bash -c "PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U postgres" \ 
-  2>dump_error.log | mc pipe destination/bdd/allDATACbox.sql
+  2>dump_error.log | mc pipe destination/$S3_DESTINATION_BUCKET/$FILE_BACKUP_PSQL
 
 
   if [[ -s "dump_error.log" ]]; then
