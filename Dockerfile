@@ -1,6 +1,13 @@
+# source https://github.com/shakapark/Backup-Tool/blob/bishopp/Dockerfile
 FROM ubuntu:latest
 
 USER root
+
+ENV ACTION="BACKUP|RESTORE"
+
+# S3 Environments Variables
+ENV S3_DESTINATION_BUCKET="bucket-dst"
+ENV FILE_BACKUP_PSQL="allDATACbox.sql"
 
 # update and install package
 RUN apt-get update
