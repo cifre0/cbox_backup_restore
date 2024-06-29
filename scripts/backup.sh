@@ -28,14 +28,10 @@ backupAllPostgresToBucket() {
   #PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER 2> dump_error.log | \
   #aws $ENDPOINT_URL s3 cp - s3://$S3_DESTINATION_BUCKET/postgres-$DATE/$FILE.sql
 
-  kubectl exec -it -n psql bdd-postgresql-0 -- bash -c "PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U postgres" \ 
-  2>dump_error.log | mc pipe destination/$S3_DESTINATION_BUCKET/$FILE_BACKUP_PSQL
-
-
-  if [[ -s "dump_error.log" ]]; then
-    cat dump_error.log
-    exit 6
-  fi
+  # if [[ -s "dump_error.log" ]]; then
+  #   cat dump_error.log
+  #   exit 6
+  # fi
 
   # DATE_ENDING=`date +%s`
   echo "Backup Done"
@@ -93,6 +89,32 @@ backupAllPostgresToBucket() {
   # DATE=$(date -d "$RETENTION days ago" +"%d-%m-%Y")
   # aws $ENDPOINT_URL s3 rm --recursive s3://$S3_DESTINATION_BUCKET/postgres-$DATE
   # aws $ENDPOINT_URL s3 rm s3://$S3_DESTINATION_BUCKET/postgres-$DATE.done
+
+  exit 0
+}
+
+backupAllPodK8sPostgresToBucket() {
+  set -e
+
+  echo "Starting Backup All Postgres"
+
+  echo "Begin Backup..."
+  # DATE_BEGIN=`date +%s`
+
+  #PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER 2> dump_error.log | \
+  #aws $ENDPOINT_URL s3 cp - s3://$S3_DESTINATION_BUCKET/postgres-$DATE/$FILE.sql
+
+  kubectl exec -it -n psql bdd-postgresql-0 -- bash -c "PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U postgres" \ 
+  2>dump_error.log | mc pipe destination/$S3_DESTINATION_BUCKET/$FILE_BACKUP_PSQL
+
+
+  if [[ -s "dump_error.log" ]]; then
+    cat dump_error.log
+    exit 6
+  fi
+
+  # DATE_ENDING=`date +%s`
+  echo "Backup Done"
 
   exit 0
 }
