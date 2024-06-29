@@ -1,11 +1,11 @@
 # source: https://github.com/shakapark/Backup-Tool/blob/bishopp/backupToAWS.sh
 
-secs_to_human() {
-  DIFF_TIME=`expr $1 - $2`
-  echo "$(( ${DIFF_TIME} / 3600 ))h $(( (${DIFF_TIME} / 60) % 60 ))m $(( ${DIFF_TIME} % 60 ))s"
-}
+# secs_to_human() {
+#   DIFF_TIME=`expr $1 - $2`
+#   echo "$(( ${DIFF_TIME} / 3600 ))h $(( (${DIFF_TIME} / 60) % 60 ))m $(( ${DIFF_TIME} % 60 ))s"
+# }
 
-DATEHOUR=$(date +"%Y-%m-%d_%H-%M")
+# DATEHOUR=$(date +"%Y-%m-%d_%H-%M")
 
 backupAllPostgresToBucket() {
   set -e
