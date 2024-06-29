@@ -23,6 +23,10 @@ case $ACTION in
         backupAllPostgresToBucket
         ;;
 
+      AllPodK8sPostgres)
+        backupAllPodK8sPostgresToBucket
+        ;;
+
       #Mysql)
       #  backupMySqlToBucket
       #  ;;
