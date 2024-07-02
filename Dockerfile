@@ -6,6 +6,9 @@ USER root
 ENV ACTION="BACKUP|RESTORE"
 ENV SRC_TYPE="BucketAWS|Postgres|AllPostgres|Mysql|Redis|backupAllPodK8sPostgresToBucket"
 
+# PSQL
+ENV POSTGRES_PASSWD=""
+
 # S3 Environments Variables
 ENV S3_DESTINATION_HOST="https://s3.amazonaws.com"
 ENV S3_DESTINATION_ACCESS_KEY=""
