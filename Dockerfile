@@ -40,4 +40,4 @@ ENV PATH="$PATH:$HOME/minio-binaries"
 
 # install rclone
 RUN mkdir -p /etc/rclone
-RUN sudo -v ; curl https://rclone.org/install.sh | bash
+RUN curl https://rclone.org/install.sh | bash
