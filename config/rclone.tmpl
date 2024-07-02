@@ -1,0 +1,16 @@
+[aws]
+type = s3
+provider = AWS
+access_key_id = $ACCESS_KEY
+secret_access_key = $SECRET_KEY
+region = $REGION_AWS # eu-west-3
+endpoint = s3.eu-west-3.amazonaws.com
+
+[backupminio]
+type = s3
+provider = Minio
+access_key_id = $ACCESS_KEY_MINIO # default: minioadmin
+secret_access_key = $SECRET_KEY_MINIO # default: minioadmin
+region = other-v2-signature
+acl = bucket-owner-full-control
+endpoint = $ENDPOINT_MINIO # http://IP:9000
