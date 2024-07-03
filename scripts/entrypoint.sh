@@ -89,5 +89,7 @@ if [[ $DEBUG = "true" ]]; then
   echo "### /config/rclone.tmpl"
   cat /config/rclone.tmpl
   cat /root/.config/rclone/rclone.conf
+  echo "## cat /etc/hosts"
+  cat /etc/hosts
 fi
   
