@@ -42,7 +42,7 @@ case $ACTION in
       #  ;;
 
       *)
-        echo "SRC_TYPE: [BucketAWS|Postgres|AllPostgres|Mysql|Redis]"
+        echo "SRC_TYPE: [BucketAWS|Postgres|AllPostgres|Mysql|Redis|AllPodK8sPostgres]"
         exit 1
     esac
     ;;
