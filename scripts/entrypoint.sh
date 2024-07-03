@@ -2,8 +2,14 @@
 
 echo "Configure mc client..."
 mkdir -p /root/.mc
-envsubst < "/config/mc-alias.tpl" > "/root/.mc/config.json"
+envsubst < "/config/mc-alias.tmpl" > "/root/.mc/config.json"
 echo "mc client configured"
+
+echo "Configure rclone..."
+mkdir -p /root/.config/rclone/
+envsubst < "/config/rclone.tmpl" > "/root/.config/rclone/"
+echo "rclone configured"
+
 
 case $ACTION in
 
