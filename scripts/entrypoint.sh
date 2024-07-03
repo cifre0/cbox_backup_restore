@@ -76,7 +76,7 @@ case $ACTION in
 
 esac
 
-if [ $DEBUG = true ]; then
+if [[ $DEBUG = "true" ]]; then
   echo "### DEBUG:"
   echo "### /config/mc-aliases.tmpl"
   cat /config/mc-aliases.tmpl
