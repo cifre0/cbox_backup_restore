@@ -10,6 +10,22 @@ mkdir -p /root/.config/rclone/
 envsubst < "/config/rclone.tmpl" > "/root/.config/rclone/rclone.conf"
 echo "rclone configured"
 
+if [[ $DEBUG = "true" ]]; then
+  echo "### DEBUG:"
+  echo "### /config/mc-aliases.tmpl"
+  cat /config/mc-aliases.tmpl
+  cat /root/.mc/config.json
+  echo "## mc ls destination"
+  mc ls destination
+  echo "## command backup psql:"
+  echo "  PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U $POSTGRES_USERNAME -h $POSTGRES_HOST -p $POSTGRES_PORT \
+  2>dump_error.log | mc pipe destination/$S3_DESTINATION_BUCKET/acb_$FILE_BACKUP_PSQL"
+  echo "### /config/rclone.tmpl"
+  cat /config/rclone.tmpl
+  cat /root/.config/rclone/rclone.conf
+  echo "## cat /etc/hosts"
+  cat /etc/hosts
+fi
 
 case $ACTION in
 
@@ -76,20 +92,5 @@ case $ACTION in
 
 esac
 
-if [[ $DEBUG = "true" ]]; then
-  echo "### DEBUG:"
-  echo "### /config/mc-aliases.tmpl"
-  cat /config/mc-aliases.tmpl
-  cat /root/.mc/config.json
-  echo "## mc ls destination"
-  mc ls destination
-  echo "## command backup psql:"
-  echo "  PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U $POSTGRES_USERNAME -h $POSTGRES_HOST -p $POSTGRES_PORT \
-  2>dump_error.log | mc pipe destination/$S3_DESTINATION_BUCKET/acb_$FILE_BACKUP_PSQL"
-  echo "### /config/rclone.tmpl"
-  cat /config/rclone.tmpl
-  cat /root/.config/rclone/rclone.conf
-  echo "## cat /etc/hosts"
-  cat /etc/hosts
-fi
+
   
