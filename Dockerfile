@@ -3,6 +3,8 @@ FROM ubuntu:latest
 
 USER root
 
+ENV DEBUG="false"
+
 ENV ACTION="BACKUP|RESTORE"
 ENV SRC_TYPE="BucketAWS|Postgres|AllPostgres|Mysql|Redis|backupAllPodK8sPostgresToBucket"
 
