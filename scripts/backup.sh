@@ -104,7 +104,10 @@ backupAllPodK8sPostgresToBucket() {
   #PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -h $POSTGRES_HOST -p $POSTGRES_PORT -U $POSTGRES_USER 2> dump_error.log | \
   #aws $ENDPOINT_URL s3 cp - s3://$S3_DESTINATION_BUCKET/postgres-$DATE/$FILE.sql
 
-  kubectl exec -it -n psql bdd-postgresql-0 -- bash -c "PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U postgres" \ 
+  # POSTGRES_PASSWD=$(kubectl get secrets -n $namespaceCBOX postgres -o yaml | grep postgres-password | awk -F" " '{print $2}' | base64 -d)
+  # POSTGRES_PASSWD=$(kubectl get secrets -n psql bdd-postgres -o yaml | grep postgres-password | awk -F" " '{print $2}' | base64 -d)
+  # username= postgres
+  kubectl exec -it -n psql bdd-postgresql-0 -- bash -c "PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U $POSTGRES_USERNAME" \ 
   2>dump_error.log | mc pipe destination/$S3_DESTINATION_BUCKET/acb_$FILE_BACKUP_PSQL
 
 
