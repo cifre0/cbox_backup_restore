@@ -28,7 +28,9 @@ ENV REGION_AWS="eu-west-3"
 
 # update and install package
 RUN apt-get update
-RUN apt-get install -y curl unzip
+RUN apt-get install -y curl \
+                       unzip \
+                       gettext
 
 # Install kubectl
 RUN curl -LO https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
