@@ -2,19 +2,19 @@
 
 echo "Configure mc client..."
 mkdir -p /root/.mc
-envsubst < "/config/mc-alias.tmpl" > "/root/.mc/config.json"
+envsubst < "/config/mc-aliases.tmpl" > "/root/.mc/config.json"
 echo "mc client configured"
 
 echo "Configure rclone..."
 mkdir -p /root/.config/rclone/
-envsubst < "/config/rclone.tmpl" > "/root/.config/rclone/"
+envsubst < "/config/rclone.tmpl" > "/root/.config/rclone/rclone.conf"
 echo "rclone configured"
 
 
 case $ACTION in
 
   BACKUP)
-    source backup.sh
+    source /scripts/backup.sh
 
     case $SRC_TYPE in
       #BucketAWS)
@@ -48,7 +48,7 @@ case $ACTION in
     ;;
   
   RESTORE)
-    source restore.sh
+    source /scripts/restore.sh
     case $DST_TYPE in
       BucketAWS)
         restoreBucketFromBucket
