@@ -44,3 +44,9 @@ ENV PATH="$PATH:$HOME/minio-binaries"
 # install rclone
 RUN mkdir -p /etc/rclone
 RUN curl https://rclone.org/install.sh | bash
+
+COPY config/ /config
+COPY scripts/ /scripts
+
+RUN chmod +x /scripts/entrypoint.sh
+ENTRYPOINT ["/scripts/entrypoint.sh"]
