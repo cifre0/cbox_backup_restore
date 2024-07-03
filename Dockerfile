@@ -9,6 +9,8 @@ ENV SRC_TYPE="BucketAWS|Postgres|AllPostgres|Mysql|Redis|backupAllPodK8sPostgres
 # PSQL
 ENV POSTGRES_PASSWD=""
 ENV POSTGRES_USERNAME="postgres"
+ENV POSTGRES_HOST=""
+ENV POSTGRES_PORT="5432"
 
 # S3 Environments Variables
 ENV S3_DESTINATION_HOST="https://s3.amazonaws.com"
