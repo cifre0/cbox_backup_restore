@@ -121,5 +121,5 @@ backupAllPodK8sPostgresToBucket() {
   # DATE_ENDING=`date +%s`
   echo "Backup Done"
 
-  #exit 0
+  exit 0
 }
