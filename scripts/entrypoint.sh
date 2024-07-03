@@ -25,6 +25,8 @@ if [[ $DEBUG = "true" ]]; then
   cat /root/.config/rclone/rclone.conf
   echo "## cat /etc/hosts"
   cat /etc/hosts
+  ## wait
+  sleep 3600; sleep 3600; sleep 3600
 fi
 
 case $ACTION in
