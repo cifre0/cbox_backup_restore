@@ -1,5 +1,5 @@
 # source https://github.com/shakapark/Backup-Tool/blob/bishopp/Dockerfile
-FROM ubuntu:latest
+FROM alpine:latest
 
 USER root
 
@@ -29,11 +29,14 @@ ENV ENDPOINT_MINIO="IP:9000"
 ENV REGION_AWS="eu-west-3"
 
 # update and install package
-RUN apt-get update
-RUN apt-get install -y curl \
-                       unzip \
-                       gettext \
-                       postgresql-client
+# RUN apt-get update
+# RUN apt-get install -y 
+RUN apk --update --no-cache add bash \
+                                coreutils \
+                                curl \
+                                unzip \
+                                gettext \
+                                postgresql-client
 
 # Install kubectl
 RUN curl -LO https://dl.k8s.io/release/$(curl -Ls https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
