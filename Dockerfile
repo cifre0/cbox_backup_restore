@@ -48,9 +48,9 @@ RUN mv ./kubectl /usr/local/bin/kubectl
 # RUN sudo -v ; chmod +x $HOME/minio-binaries/mc
 # RUN export PATH=$PATH:$HOME/minio-binaries
 # ENV PATH="$PATH:$HOME/minio-binaries"
-RUN curl https://dl.min.io/client/mc/release/linux-amd64/mc \
-         -o /bin/mc \
-    && chmod +x /bin/mc
+# RUN curl https://dl.min.io/client/mc/release/linux-amd64/mc \
+#         -o /bin/mc \
+#    && chmod +x /bin/mc
 
 # install rclone
 RUN mkdir -p /etc/rclone
