@@ -27,7 +27,7 @@ if [[ $DEBUG = "true" ]]; then
   echo "## cat /etc/hosts"
   cat /etc/hosts
   ## wait
-  sleep 3600
+  #sleep 3600
 fi
 
 case $ACTION in
