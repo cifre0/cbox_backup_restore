@@ -113,7 +113,14 @@ backupAllPodK8sPostgresToBucket() {
   PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U $POSTGRES_USERNAME -h $POSTGRES_HOST -p $POSTGRES_PORT \
   2>dump_error.log | mc pipe destination/$S3_DESTINATION_BUCKET/acb_$FILE_BACKUP_PSQL
 
+  if [[ $DEBUG = "true" ]]; then
+  echo "## command backup backupAllPodK8sPostgresToBucket:"
+  echo "PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U $POSTGRES_USERNAME -h $POSTGRES_HOST -p $POSTGRES_PORT \
+  2>dump_error.log | mc pipe destination/$S3_DESTINATION_BUCKET/acb_$FILE_BACKUP_PSQL"
+  fi
+
   if [[ -s "dump_error.log" ]]; then
+    echo "### dump_error.log" 
     cat dump_error.log
     exit 6
   fi
