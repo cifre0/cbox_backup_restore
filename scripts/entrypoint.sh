@@ -1,8 +1,9 @@
 #!/bin/bash
 
 echo "Configure mc client..."
-mkdir -p /root/.mc
-envsubst < "/config/mc-aliases.tmpl" > "/root/.mc/config.json"
+#mkdir -p /root/.mc
+#envsubst < "/config/mc-aliases.tmpl" > "/root/.mc/config.json"
+mc alias set destination $S3_DESTINATION_HOST $S3_DESTINATION_ACCESS_KEY $S3_DESTINATION_SECRET_KEY
 echo "mc client configured"
 
 echo "Configure rclone..."
