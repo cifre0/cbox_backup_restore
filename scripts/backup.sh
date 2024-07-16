@@ -138,3 +138,29 @@ backupAllPodK8sPostgresToBucket() {
 
   exit 0
 }
+
+SynchRcloneToBucket() {
+  set -e
+
+  echo "Begin Backup..."
+  # cmd rclone pour synch
+  # rclone sync source:path dest:path [flags]
+  # --no-check-certificate if self signed
+  rclone sync -P $S3_PROD_ALIAS_NAME:$S3_PROD_BUCKET_NAME $S3_BACK_ALIAS_NAME:$S3_BACK_BUCKET_NAME_OBJ
+
+  if [[ $DEBUG = "true" ]]; then
+    echo "## command backup SynchRcloneToBucket:"
+    echo "rclone sync -P prodcboxonprem:$S3_PROD_BUCKET_NAME backupminio:$S3_DESTINATION_BUCKET"
+
+    echo "### dump_error.log" 
+  
+    if [[ -s "dump_error.log" ]]; then
+      echo "### dump_error.log" 
+      cat dump_error.log
+      exit 6
+    fi
+
+  echo "Backup Done"
+  
+  exit 0
+}
