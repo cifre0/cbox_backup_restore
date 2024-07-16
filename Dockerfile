@@ -28,6 +28,10 @@ ENV SECRET_KEY_MINIO="minioadmin"
 ENV ENDPOINT_MINIO="IP:9000"
 ENV REGION_AWS="eu-west-3"
 
+# Rclone conf file
+ENV S3_PROD_BUCKET_NAME=""
+ENV S3_DESTINATION_BUCKET=""
+
 # update and install package
 # RUN apt-get update
 # RUN apt-get install -y 
