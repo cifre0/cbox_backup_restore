@@ -117,6 +117,11 @@ backupAllPodK8sPostgresToBucket() {
   echo "## command backup backupAllPodK8sPostgresToBucket:"
   echo "PGPASSWORD=$POSTGRES_PASSWD pg_dumpall -U $POSTGRES_USERNAME -h $POSTGRES_HOST -p $POSTGRES_PORT \
   2>dump_error.log | mc pipe destination/$S3_DESTINATION_BUCKET/acb_$FILE_BACKUP_PSQL"
+  echo "### dump_error.log" 
+  cat dump_error.log
+  echo "\n"
+  ## wait
+  sleep 3600
   fi
 
   if [[ -s "dump_error.log" ]]; then
@@ -128,8 +133,6 @@ backupAllPodK8sPostgresToBucket() {
   # DATE_ENDING=`date +%s`
   echo "Backup Done"
 
-  ## wait
-  sleep 3600
 
   exit 0
 }
