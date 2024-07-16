@@ -161,6 +161,9 @@ SynchRcloneToBucket() {
     else
       echo "'synch_error.log' don't exist"
     fi
+    ## wait
+    sleep 3600
+  fi
 
   echo "Backup Done"
   
