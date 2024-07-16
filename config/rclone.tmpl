@@ -8,11 +8,10 @@ endpoint = s3.eu-west-3.amazonaws.com
 
 [prodcboxonprem]
 type = s3
-provider = Minio
+provider = Ceph
 access_key_id = $ACCESS_KEY_PROD_CBOX
 secret_access_key = $SECRET_KEY_PROD_CBOX
-region = other-v2-signature
-acl = bucket-owner-full-control
+acl = private
 endpoint = $ENDPOINT_PROD_CBOX
 
 [backupminio]
