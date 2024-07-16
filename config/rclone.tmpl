@@ -17,8 +17,9 @@ endpoint = $ENDPOINT_PROD_CBOX
 [backupminio]
 type = s3
 provider = Minio
-access_key_id = $ACCESS_KEY_MINIO # default: minioadmin
-secret_access_key = $SECRET_KEY_MINIO # default: minioadmin
+access_key_id = $ACCESS_KEY_MINIO
+secret_access_key = $SECRET_KEY_MINIO
 region = other-v2-signature
 acl = bucket-owner-full-control
-endpoint = $ENDPOINT_MINIO # http://IP:9000
+endpoint = $ENDPOINT_MINIO
+# http://IP:9000
