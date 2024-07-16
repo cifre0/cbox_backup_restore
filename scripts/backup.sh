@@ -146,11 +146,12 @@ SynchRcloneToBucket() {
   # cmd rclone pour synch
   # rclone sync source:path dest:path [flags]
   # --no-check-certificate if self signed
-  rclone sync -P $S3_PROD_ALIAS_NAME:$S3_PROD_BUCKET_NAME $S3_BACK_ALIAS_NAME:$S3_BACK_BUCKET_NAME_OBJ
+  #rclone sync -P $S3_PROD_ALIAS_NAME:$S3_PROD_BUCKET_NAME $S3_BACK_ALIAS_NAME:$S3_BACK_BUCKET_NAME_OBJ
+  rclone sync -P prodcboxonprem:$S3_PROD_BUCKET_NAME backupminio:$S3_DESTINATION_BUCKET" 2>synch_error.log
 
   if [[ $DEBUG = "true" ]]; then
     echo "## command backup SynchRcloneToBucket:"
-    echo "rclone sync -P prodcboxonprem:$S3_PROD_BUCKET_NAME backupminio:$S3_DESTINATION_BUCKET" 2>synch_error.log
+    echo "rclone sync -P prodcboxonprem:$S3_PROD_BUCKET_NAME backupminio:$S3_DESTINATION_BUCKET 2>synch_error.log"
     
     echo "### synch_error.log" 
     
