@@ -59,6 +59,10 @@ case $ACTION in
       #  backupRedisToBucket
       #  ;;
 
+      SynchRclone)
+        SynchRcloneToBucket
+        ;;
+
       *)
         echo "SRC_TYPE: [BucketAWS|Postgres|AllPostgres|Mysql|Redis|AllPodK8sPostgres]"
         exit 1
