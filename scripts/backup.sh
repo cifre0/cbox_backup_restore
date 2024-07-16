@@ -123,9 +123,9 @@ backupAllPodK8sPostgresToBucket() {
       echo "### dump_error.log" 
       cat dump_error.log
       exit 6
+    else
+      echo "'dump_error.log' don't exist"
     fi
-  
-    echo "'dump_error.log' don't exist"
     ## wait
     sleep 3600
   fi
@@ -150,14 +150,16 @@ SynchRcloneToBucket() {
 
   if [[ $DEBUG = "true" ]]; then
     echo "## command backup SynchRcloneToBucket:"
-    echo "rclone sync -P prodcboxonprem:$S3_PROD_BUCKET_NAME backupminio:$S3_DESTINATION_BUCKET"
-
-    echo "### dump_error.log" 
-  
-    if [[ -s "dump_error.log" ]]; then
-      echo "### dump_error.log" 
-      cat dump_error.log
+    echo "rclone sync -P prodcboxonprem:$S3_PROD_BUCKET_NAME backupminio:$S3_DESTINATION_BUCKET" 2>synch_error.log
+    
+    echo "### synch_error.log" 
+    
+    if [[ -s "synch_error.log" ]]; then
+      echo "### synch_error.log" 
+      cat synch_error.log
       exit 6
+    else
+      echo "'synch_error.log' don't exist"
     fi
 
   echo "Backup Done"
