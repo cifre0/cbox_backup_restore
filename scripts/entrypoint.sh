@@ -21,7 +21,7 @@ if [[ $DEBUG = "true" ]]; then
   mc ls destination
   echo "### /config/rclone.tmpl"
   cat /config/rclone.tmpl
-  echo "### /root/.config/rclone/rclone.conf
+  echo "### /root/.config/rclone/rclone.conf"
   cat /root/.config/rclone/rclone.conf
   echo "## cat /etc/hosts"
   cat /etc/hosts
