@@ -1,9 +1,9 @@
 # source: https://github.com/shakapark/Backup-Tool/blob/bishopp/backupToAWS.sh
 
-# secs_to_human() {
-#   DIFF_TIME=`expr $1 - $2`
-#   echo "$(( ${DIFF_TIME} / 3600 ))h $(( (${DIFF_TIME} / 60) % 60 ))m $(( ${DIFF_TIME} % 60 ))s"
-# }
+secs_to_human() {
+  DIFF_TIME=`expr $1 - $2`
+  echo "$(( ${DIFF_TIME} / 3600 ))h $(( (${DIFF_TIME} / 60) % 60 ))m $(( ${DIFF_TIME} % 60 ))s"
+}
 
 # DATEHOUR=$(date +"%Y-%m-%d_%H-%M")
 
@@ -147,12 +147,15 @@ SynchRcloneToBucket() {
   # rclone sync source:path dest:path [flags]
   # --no-check-certificate if self signed
   #rclone sync -P $S3_PROD_ALIAS_NAME:$S3_PROD_BUCKET_NAME $S3_BACK_ALIAS_NAME:$S3_BACK_BUCKET_NAME_OBJ
+  DATE_BEGIN=`date +%s`
   rclone sync -P prodcboxonprem:$S3_PROD_BUCKET_NAME backupminio:$S3_DESTINATION_BUCKET 2>synch_error.log
-
+  DATE_ENDING=`date +%s`
+  TIME=$(secs_to_human $DATE_ENDING $DATE_BEGIN)
+  
   if [[ $DEBUG = "true" ]]; then
     echo "## command backup SynchRcloneToBucket:"
     echo "rclone sync -P prodcboxonprem:$S3_PROD_BUCKET_NAME backupminio:$S3_DESTINATION_BUCKET 2>synch_error.log"
-    
+    echo "Duration of synch: $TIME sec"
     echo "### synch_error.log" 
     
     if [[ -s "synch_error.log" ]]; then
