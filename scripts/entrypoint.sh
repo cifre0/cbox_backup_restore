@@ -63,6 +63,10 @@ case $ACTION in
         SynchRcloneToBucket
         ;;
 
+      SynchS3HyperSync)
+        SynchS3HyperSyncToBucket
+        ;;
+
       *)
         echo "SRC_TYPE: [BucketAWS|Postgres|AllPostgres|Mysql|Redis|AllPodK8sPostgres]"
         exit 1
