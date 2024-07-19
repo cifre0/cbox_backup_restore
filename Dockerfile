@@ -65,5 +65,10 @@ RUN curl https://rclone.org/install.sh | bash
 COPY config/ /config
 COPY scripts/ /scripts
 
+# install S3HyperSync 
+RUN apk --update --no-cache add default-jre
+RUN curl https://github.com/Starofall/S3HyperSync/releases/download/v0.1.5/S3HyperSync.jar \
+    -o /scripts/S3HyperSync.jar
+
 RUN chmod +x /scripts/entrypoint.sh
 ENTRYPOINT ["/scripts/entrypoint.sh"]
