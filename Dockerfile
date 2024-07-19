@@ -66,7 +66,7 @@ COPY config/ /config
 COPY scripts/ /scripts
 
 # install S3HyperSync 
-RUN apk --update --no-cache add default-jre
+RUN apk --update --no-cache add openjdk11
 RUN curl https://github.com/Starofall/S3HyperSync/releases/download/v0.1.5/S3HyperSync.jar \
     -o /scripts/S3HyperSync.jar
 
