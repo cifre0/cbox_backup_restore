@@ -63,7 +63,7 @@ case $ACTION in
         SynchRcloneToBucket
         ;;
 
-      SynchS3HyperSync)
+      S3HyperSync)
         SynchS3HyperSyncToBucket
         ;;
 
