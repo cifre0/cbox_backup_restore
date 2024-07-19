@@ -173,3 +173,40 @@ SynchRcloneToBucket() {
   
   exit 0
 }
+
+SynchS3HyperSyncToBucket() {
+  set -e
+
+  echo "Begin Backup with S3HyperSync..."
+  DATE_BEGIN=`date +%s`
+  java -jar S3HyperSync.jar --source-bucket=$S3_PROD_BUCKET_NAME --source-endpoint=$ENDPOINT_PROD_CBOX \
+  --source-key=$ACCESS_KEY_PROD_CBOX --source-secret=$SECRET_KEY_PROD_CBOX --source-region=other-v2-signature \
+  --source-path-style --target-bucket=$S3_DESTINATION_BUCKET --target-endpoint=$ENDPOINT_MINIO --target-key=$ACCESS_KEY_MINIO \
+  --target-secret=$SECRET_KEY_MINIO --target-region=other-v2-signature --target-path-style 2>synch_error.log
+  DATE_ENDING=`date +%s`
+  TIME=$(secs_to_human $DATE_ENDING $DATE_BEGIN)
+
+  if [[ $DEBUG = "true" ]]; then
+    echo "## command backup SynchRcloneToBucket:"
+    echo "  java -jar S3HyperSync.jar --source-bucket=$S3_PROD_BUCKET_NAME --source-endpoint=$ENDPOINT_PROD_CBOX \
+    --source-key=$ACCESS_KEY_PROD_CBOX --source-secret=$SECRET_KEY_PROD_CBOX --source-region=other-v2-signature \
+    --source-path-style --target-bucket=$S3_DESTINATION_BUCKET --target-endpoint=$ENDPOINT_MINIO --target-key=$ACCESS_KEY_MINIO \
+    --target-secret=$SECRET_KEY_MINIO --target-region=other-v2-signature --target-path-style 2>synch_error.log"
+    echo "Duration of synch: $TIME sec"
+    echo "### synch_error.log" 
+    
+    if [[ -s "synch_error.log" ]]; then
+      echo "### synch_error.log" 
+      cat synch_error.log
+      exit 6
+    else
+      echo "'synch_error.log' don't exist"
+    fi
+    ## wait
+    sleep 3600
+  fi
+  
+  echo "Backup Done"
+  
+  exit 0
+}
