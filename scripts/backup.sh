@@ -178,6 +178,8 @@ SynchS3HyperSyncToBucket() {
   set -e
 
   echo "Begin Backup with S3HyperSync..."
+  pwd
+  ls
   DATE_BEGIN=`date +%s`
   java -jar /scripts/S3HyperSync.jar --source-bucket=$S3_PROD_BUCKET_NAME --source-endpoint=$ENDPOINT_PROD_CBOX \
   --source-key=$ACCESS_KEY_PROD_CBOX --source-secret=$SECRET_KEY_PROD_CBOX --source-region=other-v2-signature \
