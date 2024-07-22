@@ -179,7 +179,7 @@ SynchS3HyperSyncToBucket() {
 
   echo "Begin Backup with S3HyperSync..."
   DATE_BEGIN=`date +%s`
-  java -jar S3HyperSync.jar --source-bucket=$S3_PROD_BUCKET_NAME --source-endpoint=$ENDPOINT_PROD_CBOX \
+  java -jar /scripts/S3HyperSync.jar --source-bucket=$S3_PROD_BUCKET_NAME --source-endpoint=$ENDPOINT_PROD_CBOX \
   --source-key=$ACCESS_KEY_PROD_CBOX --source-secret=$SECRET_KEY_PROD_CBOX --source-region=other-v2-signature \
   --source-path-style --target-bucket=$S3_DESTINATION_BUCKET --target-endpoint=$ENDPOINT_MINIO --target-key=$ACCESS_KEY_MINIO \
   --target-secret=$SECRET_KEY_MINIO --target-region=other-v2-signature --target-path-style 
@@ -188,7 +188,7 @@ SynchS3HyperSyncToBucket() {
 
   if [[ $DEBUG = "true" ]]; then
     echo "## command backup SynchRcloneToBucket:"
-    echo "  java -jar S3HyperSync.jar --source-bucket=$S3_PROD_BUCKET_NAME --source-endpoint=$ENDPOINT_PROD_CBOX \
+    echo "  java -jar /scripts/S3HyperSync.jar --source-bucket=$S3_PROD_BUCKET_NAME --source-endpoint=$ENDPOINT_PROD_CBOX \
     --source-key=$ACCESS_KEY_PROD_CBOX --source-secret=$SECRET_KEY_PROD_CBOX --source-region=other-v2-signature \
     --source-path-style --target-bucket=$S3_DESTINATION_BUCKET --target-endpoint=$ENDPOINT_MINIO --target-key=$ACCESS_KEY_MINIO \
     --target-secret=$SECRET_KEY_MINIO --target-region=other-v2-signature --target-path-style 2>synch_error.log"
