@@ -212,3 +212,42 @@ SynchS3HyperSyncToBucket() {
   
   exit 0
 }
+
+SynchS3SyncToBucket() {
+  set -e
+
+  echo "Begin Backup with S3Sync..."
+  pwd
+  ls
+  DATE_BEGIN=`date +%s`
+
+  # s3sync --tk KEY2 --ts SECRET2 --sk KEY1 --ss SECRET1 --se "http://127.0.0.1:7484" --te "http://127.0.0.1:7484" -w 128 s3://bucket_name_source s3://bucket_destination
+  s3sync  --tk $ACCESS_KEY_MINIO --ts $SECRET_KEY_MINIO --sk $ACCESS_KEY_PROD_CBOX --ss $SECRET_KEY_PROD_CBOX --se "$ENDPOINT_PROD_CBOX" \
+          --te "$ENDPOINT_MINIO" -w 128 s3://$S3_PROD_BUCKET_NAME s3://$S3_DESTINATION_BUCKET
+  
+  DATE_ENDING=`date +%s`
+  TIME=$(secs_to_human $DATE_ENDING $DATE_BEGIN)
+
+  if [[ $DEBUG = "true" ]]; then
+    echo "## command backup SynchRcloneToBucket:"
+    echo "s3sync  --tk $ACCESS_KEY_MINIO --ts $SECRET_KEY_MINIO --sk $ACCESS_KEY_PROD_CBOX --ss $SECRET_KEY_PROD_CBOX --se "$ENDPOINT_PROD_CBOX" \
+                  --te "$ENDPOINT_MINIO" -w 128 s3://$S3_PROD_BUCKET_NAME s3://$S3_DESTINATION_BUCKET"
+    echo "Duration of synch: $TIME sec"
+    echo "### synch_error.log" 
+    
+    if [[ -s "synch_error.log" ]]; then
+      echo "### synch_error.log" 
+      cat synch_error.log
+      exit 6
+    else
+      echo "'synch_error.log' don't exist"
+    fi
+    ## wait
+    sleep 3600
+  fi
+  
+  echo "Backup Done"
+  
+  exit 0
+}
+
