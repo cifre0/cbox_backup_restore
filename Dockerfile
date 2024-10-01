@@ -70,5 +70,9 @@ RUN apk --update --no-cache add openjdk11 wget
 RUN wget https://github.com/Starofall/S3HyperSync/releases/download/v0.1.5/S3HyperSync.jar \
     -O /scripts/S3HyperSync.jar
 
+# install S3sync
+RUN wget https://github.com/larrabee/s3sync/releases/download/2.62/s3sync_Linux_x86_64.tar.gz \
+    -O /scripts/s3sync_Linux_x86_64.tar.gz && tar -xvzf /scripts/s3sync_Linux_x86_64.tar.gz
+
 RUN chmod +x /scripts/entrypoint.sh
 ENTRYPOINT ["/scripts/entrypoint.sh"]
