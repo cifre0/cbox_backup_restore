@@ -66,9 +66,13 @@ case $ACTION in
       S3HyperSync)
         SynchS3HyperSyncToBucket
         ;;
-
+        
+      S3Sync)
+        SynchS3SyncToBucket
+        ;;
+        
       *)
-        echo "SRC_TYPE: [BucketAWS|Postgres|AllPostgres|Mysql|Redis|AllPodK8sPostgres]"
+        echo "SRC_TYPE: [BucketAWS|Postgres|AllPostgres|Mysql|Redis|SynchRclone|S3HyperSync|S3Sync]"
         exit 1
     esac
     ;;
