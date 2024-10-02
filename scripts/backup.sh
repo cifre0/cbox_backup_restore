@@ -151,6 +151,8 @@ SynchRcloneToBucket() {
   rclone sync -P prodcboxonprem:$S3_PROD_BUCKET_NAME backupminio:$S3_DESTINATION_BUCKET 2>synch_error.log
   DATE_ENDING=`date +%s`
   TIME=$(secs_to_human $DATE_ENDING $DATE_BEGIN)
+  echo "rclone time of synch: $TIME"
+  # logger -t "rclone time of synch" "$TIME"
   
   if [[ $DEBUG = "true" ]]; then
     echo "## command backup SynchRcloneToBucket:"
@@ -178,8 +180,8 @@ SynchS3HyperSyncToBucket() {
   set -e
 
   echo "Begin Backup with S3HyperSync..."
-  pwd
-  ls
+  # pwd
+  # ls
   DATE_BEGIN=`date +%s`
   java -jar /scripts/S3HyperSync.jar --source-bucket=$S3_PROD_BUCKET_NAME --source-endpoint=$ENDPOINT_PROD_CBOX \
   --source-key=$ACCESS_KEY_PROD_CBOX --source-secret=$SECRET_KEY_PROD_CBOX --source-region=other-v2-signature \
@@ -217,8 +219,8 @@ SynchS3SyncToBucket() {
   set -e
 
   echo "Begin Backup with S3Sync..."
-  pwd
-  ls
+  # pwd
+  # ls
   DATE_BEGIN=`date +%s`
 
   # s3sync --tk KEY2 --ts SECRET2 --sk KEY1 --ss SECRET1 --se "http://127.0.0.1:7484" --te "http://127.0.0.1:7484" -w 128 s3://bucket_name_source s3://bucket_destination
