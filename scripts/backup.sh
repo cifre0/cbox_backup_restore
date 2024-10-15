@@ -225,7 +225,7 @@ SynchS3SyncToBucket() {
 
   # s3sync --tk KEY2 --ts SECRET2 --sk KEY1 --ss SECRET1 --se "http://127.0.0.1:7484" --te "http://127.0.0.1:7484" -w 128 s3://bucket_name_source s3://bucket_destination
   ./s3sync  --tk $ACCESS_KEY_MINIO --ts $SECRET_KEY_MINIO --sk $ACCESS_KEY_PROD_CBOX --ss $SECRET_KEY_PROD_CBOX --se "$ENDPOINT_PROD_CBOX" \
-            --te "$ENDPOINT_MINIO" -w 128 s3://$S3_PROD_BUCKET_NAME s3://$S3_DESTINATION_BUCKET --sr $S3_SOURCE_REGION --tr $S3_DEST_REGION $ADD_ARG
+            --te "$ENDPOINT_MINIO" -w 128 s3://$S3_PROD_BUCKET_NAME s3://$S3_DESTINATION_BUCKET --sr $S3_SOURCE_REGION --tr $S3_DESTINATION_REGION $ADD_ARG
   
   DATE_ENDING=`date +%s`
   TIME=$(secs_to_human $DATE_ENDING $DATE_BEGIN)
@@ -233,7 +233,7 @@ SynchS3SyncToBucket() {
   if [[ $DEBUG = "true" ]]; then
     echo "## command backup SynchRcloneToBucket:"
     echo "./s3sync  --tk $ACCESS_KEY_MINIO --ts $SECRET_KEY_MINIO --sk $ACCESS_KEY_PROD_CBOX --ss $SECRET_KEY_PROD_CBOX --se "$ENDPOINT_PROD_CBOX" \
-                    --te "$ENDPOINT_MINIO" -w 128 s3://$S3_PROD_BUCKET_NAME s3://$S3_DESTINATION_BUCKET --sr $S3_SOURCE_REGION --tr $S3_DEST_REGION $ADD_ARG"
+                    --te "$ENDPOINT_MINIO" -w 128 s3://$S3_PROD_BUCKET_NAME s3://$S3_DESTINATION_BUCKET --sr $S3_SOURCE_REGION --tr $S3_DESTINATION_REGION $ADD_ARG"
     echo "Duration of synch: $TIME sec"
     echo "### synch_error.log" 
     
