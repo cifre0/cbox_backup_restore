@@ -233,7 +233,7 @@ SynchS3SyncToBucket() {
   if [[ $DEBUG = "true" ]]; then
     echo "## command backup SynchRcloneToBucket:"
     echo "./s3sync  --tk $ACCESS_KEY_MINIO --ts $SECRET_KEY_MINIO --sk $ACCESS_KEY_PROD_CBOX --ss $SECRET_KEY_PROD_CBOX --se "$ENDPOINT_PROD_CBOX" \
-                    --te "$ENDPOINT_MINIO" -w 128 s3://$S3_PROD_BUCKET_NAME s3://$S3_DESTINATION_BUCKET $ADD_ARG"
+                    --te "$ENDPOINT_MINIO" -w 128 s3://$S3_PROD_BUCKET_NAME s3://$S3_DESTINATION_BUCKET --sr $S3_SOURCE_REGION --tr $S3_DEST_REGION $ADD_ARG"
     echo "Duration of synch: $TIME sec"
     echo "### synch_error.log" 
     
